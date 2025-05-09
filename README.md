@@ -12,6 +12,31 @@ This project performs binary classification (progression and death prediction) b
 - Model training and ROC evaluation
 - Soft-voting fusion
 - Visualization with ROC curves and SHAP values
+---
+
+## 🧬 Radiomics Feature Extraction
+
+We extract quantitative radiomics features from 3D PET and CT images using [PyRadiomics](https://github.com/AIM-Harvard/pyradiomics).
+
+### 💡 What this script does:
+
+- Scans patient folders under `ROI/` to locate PET masks
+- Finds corresponding PET and CT images from the `converted_nii/` folder
+- Automatically resamples CT and PET images to match the mask resolution
+- Extracts radiomics features from each modality
+- Saves results into `radiomics_features.xlsx` with separate sheets for CT and PET
+- Logs any failed cases (e.g. missing images, invalid masks) into `failed_cases.csv`
+
+### 📁 Output:
+
+- `converted_nii/radiomics_features.xlsx` – extracted feature table
+- `converted_nii/failed_cases.csv` – log of patients that could not be processed
+
+### 📦 Dependencies:
+
+```bash
+pip install pyradiomics SimpleITK nibabel pandas numpy tqdm openpyxl
+
 
 ---
 
