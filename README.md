@@ -14,28 +14,40 @@ This project performs binary classification (progression and death prediction) b
 - Visualization with ROC curves and SHAP values
 ---
 
+---
+
 ## 🧬 Radiomics Feature Extraction
 
-We extract quantitative radiomics features from 3D PET and CT images using [PyRadiomics](https://github.com/AIM-Harvard/pyradiomics).
+We extract 3D radiomics features from CT and PET scans using [PyRadiomics](https://github.com/AIM-Harvard/pyradiomics). Each scan is paired with a patient-specific binary or labeled segmentation mask.
 
-### 💡 What this script does:
+### 🗂 Input Folders
 
-- Scans patient folders under `ROI/` to locate PET masks
-- Finds corresponding PET and CT images from the `converted_nii/` folder
-- Automatically resamples CT and PET images to match the mask resolution
-- Extracts radiomics features from each modality
-- Saves results into `radiomics_features.xlsx` with separate sheets for CT and PET
-- Logs any failed cases (e.g. missing images, invalid masks) into `failed_cases.csv`
+- `/H/ROI/` – contains patient masks in `.nii` format
+- `/H/converted_nii/` – contains CT and PET images in NIfTI format (`_CT`, `_PET` suffix)
+- `tumor.yaml` – PyRadiomics parameter config file
 
-### 📁 Output:
+### ⚙️ Process Overview
 
-- `converted_nii/radiomics_features.xlsx` – extracted feature table
-- `converted_nii/failed_cases.csv` – log of patients that could not be processed
+- For each patient in `ROI`:
+  - Extracts patient name from folder
+  - Matches corresponding CT and PET folder using name fragment
+  - Loads images using `SimpleITK`, falls back to `nibabel` if needed
+  - Resamples CT and PET images to match the mask resolution
+  - Uses PyRadiomics to extract features (with a YAML config)
+  - Separately stores CT and PET features
 
-### 📦 Dependencies:
+### 📁 Output Files
+
+| File | Description |
+|------|-------------|
+| `radiomics_features_all.xlsx` | Excel file with `CT` and `PET` sheets for extracted features |
+| `failed_cases_all.csv`        | Log of patients with missing or invalid data |
+
+### 🧱 Dependencies
 
 ```bash
 pip install pyradiomics SimpleITK nibabel pandas numpy tqdm openpyxl
+
 
 
 ---
