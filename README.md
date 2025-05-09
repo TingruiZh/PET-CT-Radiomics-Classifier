@@ -43,12 +43,6 @@ We extract 3D radiomics features from CT and PET scans using [PyRadiomics](https
 | `radiomics_features_all.xlsx` | Excel file with `CT` and `PET` sheets for extracted features |
 | `failed_cases_all.csv`        | Log of patients with missing or invalid data |
 
-### 🧱 Dependencies
-
-```bash
-pip install pyradiomics SimpleITK nibabel pandas numpy tqdm openpyxl
-
-
 
 ---
 
@@ -93,3 +87,5 @@ Each task uses 10 selected radiomics features.
 
 ```bash
 pip install pandas matplotlib scikit-learn xgboost openpyxl
+pip install pyradiomics SimpleITK nibabel pandas numpy tqdm openpyxl
+
