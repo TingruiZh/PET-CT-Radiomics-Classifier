@@ -83,6 +83,38 @@ Each task uses 10 selected radiomics features.
 
 ---
 
+## 🎯 Prediction Output
+
+After training on all valid patient samples for each task, we use the **fusion model (soft-voting VotingClassifier)** to output individual prediction probabilities.
+
+### 📄 Output File
+
+| File                                | Description                                         |
+|-------------------------------------|-----------------------------------------------------|
+| `fusion_patient_probabilities.xlsx` | Contains the predicted probabilities per patient for each task using the trained fusion model |
+
+### 📑 Columns in Output Excel
+
+| Column             | Description                                                   |
+|--------------------|---------------------------------------------------------------|
+| `patient`          | Extracted from the third-to-last column of the original Excel |
+| `dataset`          | PET or CT                                                     |
+| `label`            | Target label: `progression` or `death`                        |
+| `true_label`       | Ground truth (0 or 1)                                          |
+| `fusion_probability` | Predicted probability of the positive class (label = 1)     |
+
+### 🧪 Example:
+
+| patient | dataset | label       | true_label | fusion_probability |
+|---------|---------|-------------|------------|---------------------|
+| P001    | PET     | progression | 1          | 0.84                |
+| P001    | PET     | death       | 0          | 0.21                |
+| P001    | CT      | progression | 1          | 0.75                |
+| P001    | CT      | death       | 0          | 0.32                |
+
+This result can be used for patient-level risk stratification and decision support.
+
+---
 ## 🛠 Requirements
 
 ```bash
