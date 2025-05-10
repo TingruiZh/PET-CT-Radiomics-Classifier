@@ -103,7 +103,7 @@ After training on all valid patient samples for each task, we use the **fusion m
 | `true_label`       | Ground truth (0 or 1)                                          |
 | `fusion_probability` | Predicted probability of the positive class (label = 1)     |
 
-### 🧪 Example:
+### 🧪 Example（NOT THE REAL ONE）:
 
 | patient | dataset | label       | true_label | fusion_probability |
 |---------|---------|-------------|------------|---------------------|
