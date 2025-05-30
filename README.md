@@ -58,6 +58,10 @@ We extract 3D radiomics features from CT and PET scans using [PyRadiomics](https
 - AdaBoost  
 - XGBoost  
 - **Fusion Model (Soft Voting)**
+- MotherNet
+- TabPFNv2
+- GAMformer
+- Tabflex
 
 ---
 
@@ -82,6 +86,45 @@ Each task uses 10 selected radiomics features.
 - Optional SHAP value plots (coming soon)
 
 ---
+
+##Index Calculation
+- **Precision**:
+
+  $$
+  Precision = \frac{TP}{TP + FP}
+  $$
+
+- **Recall**:
+
+  $$
+  Recall = \frac{TP}{TP + FN}
+  $$
+
+- **F1-Score**:
+
+  $$
+  F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}
+  $$
+
+- **Accuracy**:
+
+  $$
+  Accuracy = \frac{TP + TN}{TP + TN + FP + FN}
+  $$
+
+- **AUC (Area Under the Curve)**:
+
+  AUC is calculated from the ROC curve, which plots the True Positive Rate (TPR) against the False Positive Rate (FPR). It can be expressed as:
+
+  $$
+  AUC = \int_{0}^{1} TPR(FPR) \, d(FPR)
+  $$
+
+  where:
+  - TPR = Recall = $\frac{TP}{TP + FN}$
+  - FPR = $\frac{FP}{FP + TN}$
+
+
 
 ## 🎯 Prediction Output
 
@@ -120,4 +163,10 @@ This result can be used for patient-level risk stratification and decision suppo
 ```bash
 pip install pandas matplotlib scikit-learn xgboost openpyxl
 pip install pyradiomics SimpleITK nibabel pandas numpy tqdm openpyxl
+---
+## References
+
+- [TICL (Tabular In-Context Learning) - Microsoft](https://github.com/microsoft/ticl)
+- [TabPFN - PriorLabs](https://github.com/PriorLabs/tabpfn)
+
 
